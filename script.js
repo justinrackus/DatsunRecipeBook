@@ -87,7 +87,7 @@ const recipes = [
     "": "",
     "__1": ""
   }
-]
+];
 const recipesDiv = document.getElementById('recipes');
 const searchInput = document.getElementById('search');
 
