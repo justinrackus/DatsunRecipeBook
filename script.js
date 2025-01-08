@@ -1,191 +1,153 @@
-const recipes = [
-  {
-    "Recipe name": "Bao dough",
-    "Ingredient name": "AP Flour",
-    "Quantity": 2000,
-    "Unit": "grams",
-    "Steps": "",
-    "Portion size": 1,
-    "Conversions": "grams:1,cups:0.008",
-    "": "",
-    "__1": ""
-  },
-  {
-    "Recipe name": "Bao dough",
-    "Ingredient name": "Rice Flour",
-    "Quantity": 100,
-    "Unit": "grams",
-    "Steps": "",
-    "Portion size": 1,
-    "Conversions": "grams:1,cups:0.008",
-    "": "",
-    "__1": ""
-  },
-  {
-    "Recipe name": "Bao dough",
-    "Ingredient name": "Baking soda",
-    "Quantity": 15,
-    "Unit": "grams",
-    "Steps": "",
-    "Portion size": 1,
-    "Conversions": "grams:1,cups:0.008",
-    "": "",
-    "__1": ""
-  },
-  {
-    "Recipe name": "Bao dough",
-    "Ingredient name": "instand dry active yeast",
-    "Quantity": 25,
-    "Unit": "grams",
-    "Steps": "",
-    "Portion size": 1,
-    "Conversions": "grams:1,cups:0.008",
-    "": "",
-    "__1": ""
-  },
-  {
-    "Recipe name": "Bao dough",
-    "Ingredient name": "white sugar",
-    "Quantity": 200,
-    "Unit": "grams",
-    "Steps": "",
-    "Portion size": 1,
-    "Conversions": "grams:1,cups:0.008",
-    "": "",
-    "__1": ""
-  },
-  {
-    "Recipe name": "Bao dough",
-    "Ingredient name": "salt",
-    "Quantity": 15,
-    "Unit": "grams",
-    "Steps": "",
-    "Portion size": 1,
-    "Conversions": "grams:1,cups:0.008",
-    "": "",
-    "__1": ""
-  },
-  {
-    "Recipe name": "Bao dough",
-    "Ingredient name": "warm water",
-    "Quantity": 1120,
-    "Unit": "grams",
-    "Steps": "",
-    "Portion size": 1,
-    "Conversions": "grams:1,cups:0.008",
-    "": "",
-    "__1": ""
-  },
-  {
-    "Recipe name": "Bao dough",
-    "Ingredient name": "oil",
-    "Quantity": 220,
-    "Unit": "grams",
-    "Steps": "",
-    "Portion size": 1,
-    "Conversions": "grams:1,cups:0.008",
-    "": "",
-    "__1": ""
-  }
-];
-const recipesDiv = document.getElementById('recipes');
-const searchInput = document.getElementById('search');
+// Wait for the DOM to be fully loaded before executing the script
+document.addEventListener("DOMContentLoaded", function() {
+  // Raw JSON data (Replace this with your actual data)
+  const recipes = [
+    {
+      "Recipe Name": "Bao dough",
+      "Portion Size": 1,
+      "Ingredient Name": "AP Flour",
+      "Quantity": 2000,
+      "Unit": "grams",
+      "Conversions": "grams:1,cups:0.008",
+      "Steps": "Mix all ingredients together."
+    },
+    {
+      "Recipe Name": "Bao dough",
+      "Portion Size": 1,
+      "Ingredient Name": "Rice Flour",
+      "Quantity": 100,
+      "Unit": "grams",
+      "Conversions": "grams:1,cups:0.008",
+      "Steps": "Mix all ingredients together."
+    },
+    {
+      "Recipe Name": "Bao dough",
+      "Portion Size": 1,
+      "Ingredient Name": "Baking soda",
+      "Quantity": 15,
+      "Unit": "grams",
+      "Conversions": "grams:1,cups:0.008",
+      "Steps": "Mix all ingredients together."
+    },
+    {
+      "Recipe Name": "Bao dough",
+      "Portion Size": 1,
+      "Ingredient Name": "Instant dry active yeast",
+      "Quantity": 25,
+      "Unit": "grams",
+      "Conversions": "grams:1,cups:0.008",
+      "Steps": "Mix all ingredients together."
+    },
+    {
+      "Recipe Name": "Bao dough",
+      "Portion Size": 1,
+      "Ingredient Name": "White sugar",
+      "Quantity": 200,
+      "Unit": "grams",
+      "Conversions": "grams:1,cups:0.008",
+      "Steps": "Mix all ingredients together."
+    },
+    {
+      "Recipe Name": "Bao dough",
+      "Portion Size": 1,
+      "Ingredient Name": "Salt",
+      "Quantity": 15,
+      "Unit": "grams",
+      "Conversions": "grams:1,cups:0.008",
+      "Steps": "Mix all ingredients together."
+    },
+    {
+      "Recipe Name": "Bao dough",
+      "Portion Size": 1,
+      "Ingredient Name": "Warm water",
+      "Quantity": 1120,
+      "Unit": "grams",
+      "Conversions": "grams:1,cups:0.008",
+      "Steps": "Mix all ingredients together."
+    },
+    {
+      "Recipe Name": "Bao dough",
+      "Portion Size": 1,
+      "Ingredient Name": "Oil",
+      "Quantity": 220,
+      "Unit": "grams",
+      "Conversions": "grams:1,cups:0.008",
+      "Steps": "Mix all ingredients together."
+    },
+  ];
 
-function displayRecipes(filter = '') {
-    recipesDiv.innerHTML = '';
-    recipes
-        .filter(recipe => recipe["Recipe Name"].toLowerCase().includes(filter.toLowerCase()))
-        .forEach(recipe => {
-            const recipeDiv = document.createElement('div');
-            recipeDiv.className = 'recipe';
+  // Group recipes by their "Recipe Name"
+  const groupedRecipes = recipes.reduce((acc, recipe) => {
+    if (!acc[recipe["Recipe Name"]]) {
+      acc[recipe["Recipe Name"]] = {
+        name: recipe["Recipe Name"],
+        portionSize: recipe["Portion Size"],
+        ingredients: [],
+        steps: recipe["Steps"],
+        conversions: recipe["Conversions"]
+      };
+    }
 
-            // Ingredients List with Initial Quantities
-            const ingredientsList = recipe.Ingredients.map(ingredient => `
-                <li>${ingredient.name}: 
-                <span class="quantity">${ingredient.quantity}</span> 
-                <span class="unit">${ingredient.unit}</span>
-                </li>
-            `).join('');
-
-            recipeDiv.innerHTML = `
-                <h2>${recipe["Recipe Name"]}</h2>
-                <p><strong>Steps:</strong> ${recipe.Steps}</p>
-                <p><strong>Portion Size:</strong> ${recipe["Portion Size"]}</p>
-                <label for="portion">Adjust Portion Size:</label>
-                <input type="number" id="portion-${recipe["Recipe Name"]}" value="${recipe["Portion Size"]}" onchange="adjustPortion(this, '${recipe["Recipe Name"]}')">
-                <ul>${ingredientsList}</ul>
-            `;
-            recipesDiv.appendChild(recipeDiv);
-        });
-}
-
-function adjustPortion(input, recipeName) {
-    const newPortion = input.value;
-    const recipe = recipes.find(r => r["Recipe Name"] === recipeName);
-
-    if (!recipe) return;
-
-    const scalingFactor = newPortion / recipe["Portion Size"];
-
-    // Update Ingredient Quantities Dynamically
-    recipe.Ingredients.forEach((ingredient, index) => {
-        const quantitySpan = document.querySelectorAll('.quantity')[index];
-        const updatedQuantity = (ingredient.quantity * scalingFactor).toFixed(2); // Round to 2 decimals
-        quantitySpan.textContent = updatedQuantity;
+    // Add ingredient to the grouped recipe
+    acc[recipe["Recipe Name"]].ingredients.push({
+      ingredient: recipe["Ingredient Name"],
+      quantity: recipe["Quantity"],
+      unit: recipe["Unit"]
     });
 
-    // Update Portion Size
-    recipe["Portion Size"] = newPortion;
-}
+    return acc;
+  }, {});
 
-searchInput.addEventListener('input', () => displayRecipes(searchInput.value));
-displayRecipes();
+  // Function to display the grouped recipes
+  function displayRecipes(groupedRecipes) {
+    const recipesContainer = document.getElementById("recipes-container");
 
+    // Clear the existing recipes
+    recipesContainer.innerHTML = '';
 
-function displayRecipes(filter = '') {
-    recipesDiv.innerHTML = '';
-    recipes
-        .filter(recipe => recipe["Recipe Name"].toLowerCase().includes(filter.toLowerCase()))
-        .forEach(recipe => {
-            const recipeDiv = document.createElement('div');
-            recipeDiv.className = 'recipe';
+    // Loop through each grouped recipe and display it
+    Object.values(groupedRecipes).forEach((recipe) => {
+      const recipeElement = document.createElement('div');
+      recipeElement.classList.add('recipe');
 
-            const ingredientsList = recipe.Ingredients.map((ingredient, index) => `
-                <li>
-                    ${ingredient.name}: 
-                    <span class="quantity">${ingredient.quantity}</span>
-                    <select id="unit-${recipe["Recipe Name"]}-${index}" onchange="convertUnit('${recipe["Recipe Name"]}', ${index}, this.value)">
-                        ${Object.keys(ingredient.conversions).map(unit => `
-                            <option value="${unit}" ${unit === ingredient.unit ? 'selected' : ''}>
-                                ${unit}
-                            </option>
-                        `).join('')}
-                    </select>
-                </li>
-            `).join('');
+      // Format ingredients with each on its own line
+      const ingredientsList = recipe.ingredients.map(ingredient => {
+        return `${ingredient.ingredient}: ${ingredient.quantity} ${ingredient.unit}`;
+      }).join('<br>');  // Use <br> to separate ingredients onto new lines
 
-            recipeDiv.innerHTML = `
-                <h2>${recipe["Recipe Name"]}</h2>
-                <p><strong>Steps:</strong> ${recipe.Steps}</p>
-                <label for="portion">Adjust Portion Size:</label>
-                <input type="number" id="portion-${recipe["Recipe Name"]}" value="${recipe["Portion Size"]}" onchange="adjustPortion(this, '${recipe["Recipe Name"]}')">
-                <ul>${ingredientsList}</ul>
-            `;
-            recipesDiv.appendChild(recipeDiv);
-        });
-}
+      // Recipe title and ingredients
+      recipeElement.innerHTML = `
+        <h3>${recipe.name}</h3>
+        <p><strong>Portion Size:</strong> ${recipe.portionSize}</p>
+        <p><strong>Ingredients:</strong><br> ${ingredientsList}</p>
+        <p><strong>Instructions:</strong><br> ${recipe.steps}</p>
+        <p><strong>Conversions:</strong><br> ${recipe.conversions}</p>
+      `;
 
-function convertUnit(recipeName, ingredientIndex, newUnit) {
-    const recipe = recipes.find(r => r["Recipe Name"] === recipeName);
-    if (!recipe) return;
+      recipesContainer.appendChild(recipeElement);
+    });
+  }
 
-    const ingredient = recipe.Ingredients[ingredientIndex];
-    if (!ingredient || !ingredient.conversions[newUnit]) return;
+  // Function to handle the search
+  function handleSearch() {
+    const searchTerm = document.getElementById('search-bar').value.toLowerCase();
 
-    const conversionFactor = ingredient.conversions[newUnit] / ingredient.conversions[ingredient.unit];
-    ingredient.quantity = (ingredient.quantity * conversionFactor).toFixed(2);
-    ingredient.unit = newUnit;
+    // Filter recipes based on search term (search by Recipe Name or Ingredient Name)
+    const filteredRecipes = Object.values(groupedRecipes).filter(recipe =>
+      recipe.name.toLowerCase().includes(searchTerm) ||
+      recipe.ingredients.some(ingredient =>
+        ingredient.ingredient.toLowerCase().includes(searchTerm)
+      )
+    );
 
-    // Re-render the recipes
-    displayRecipes(searchInput.value);
-}
+    // Display filtered recipes
+    displayRecipes(filteredRecipes);
+  }
+
+  // Add event listener to the search bar
+  const searchBar = document.getElementById('search-bar');
+  searchBar.addEventListener('input', handleSearch);
+
+  // Initial display of all grouped recipes
+  displayRecipes(groupedRecipes);
+});
