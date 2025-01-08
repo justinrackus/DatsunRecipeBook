@@ -1,16 +1,93 @@
 const recipes = [
-    {
-        "Recipe Name": "Pancakes",
-        "Ingredients": [
-            { "name": "Flour", "quantity": 200, "unit": "grams" },
-            { "name": "Milk", "quantity": 300, "unit": "ml" },
-            { "name": "Egg", "quantity": 2, "unit": "pieces" }
-        ],
-        "Steps": "Mix all ingredients and cook on a pan.",
-        "Portion Size": 4
-    }
-];
-
+  {
+    "Recipe name": "Bao dough",
+    "Ingredient name": "AP Flour",
+    "Quantity": 2000,
+    "Unit": "grams",
+    "Steps": "",
+    "Portion size": 1,
+    "Conversions": "grams:1,cups:0.008",
+    "": "",
+    "__1": ""
+  },
+  {
+    "Recipe name": "Bao dough",
+    "Ingredient name": "Rice Flour",
+    "Quantity": 100,
+    "Unit": "grams",
+    "Steps": "",
+    "Portion size": 1,
+    "Conversions": "grams:1,cups:0.008",
+    "": "",
+    "__1": ""
+  },
+  {
+    "Recipe name": "Bao dough",
+    "Ingredient name": "Baking soda",
+    "Quantity": 15,
+    "Unit": "grams",
+    "Steps": "",
+    "Portion size": 1,
+    "Conversions": "grams:1,cups:0.008",
+    "": "",
+    "__1": ""
+  },
+  {
+    "Recipe name": "Bao dough",
+    "Ingredient name": "instand dry active yeast",
+    "Quantity": 25,
+    "Unit": "grams",
+    "Steps": "",
+    "Portion size": 1,
+    "Conversions": "grams:1,cups:0.008",
+    "": "",
+    "__1": ""
+  },
+  {
+    "Recipe name": "Bao dough",
+    "Ingredient name": "white sugar",
+    "Quantity": 200,
+    "Unit": "grams",
+    "Steps": "",
+    "Portion size": 1,
+    "Conversions": "grams:1,cups:0.008",
+    "": "",
+    "__1": ""
+  },
+  {
+    "Recipe name": "Bao dough",
+    "Ingredient name": "salt",
+    "Quantity": 15,
+    "Unit": "grams",
+    "Steps": "",
+    "Portion size": 1,
+    "Conversions": "grams:1,cups:0.008",
+    "": "",
+    "__1": ""
+  },
+  {
+    "Recipe name": "Bao dough",
+    "Ingredient name": "warm water",
+    "Quantity": 1120,
+    "Unit": "grams",
+    "Steps": "",
+    "Portion size": 1,
+    "Conversions": "grams:1,cups:0.008",
+    "": "",
+    "__1": ""
+  },
+  {
+    "Recipe name": "Bao dough",
+    "Ingredient name": "oil",
+    "Quantity": 220,
+    "Unit": "grams",
+    "Steps": "",
+    "Portion size": 1,
+    "Conversions": "grams:1,cups:0.008",
+    "": "",
+    "__1": ""
+  }
+]
 const recipesDiv = document.getElementById('recipes');
 const searchInput = document.getElementById('search');
 
